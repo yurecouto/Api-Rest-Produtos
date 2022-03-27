@@ -36,10 +36,11 @@ router.get("/:id", async (req, res) => {
 })
 
 // Update de dados (Verbo PATCH)
-router.patch('/produto/:id', async (req, res) => {
+router.patch("/:id", async (req, res) => {
     // Extrair o id da requisição pela url
     const id = req.params.id
 
+    console.log(id)
     const {nome, descricao, fotoS3, estoque, preco} = req.body
     const produto = {nome, descricao, fotoS3, estoque, preco}
 
@@ -51,14 +52,14 @@ router.patch('/produto/:id', async (req, res) => {
             return
         }
 
-        res.status(200).json(person)
+        res.status(200).json(produto)
     } catch (error) {
         res.status(500).json({erro: error})
     }
 })
 
 // Deletar dados (Verbo DELETE)
-router.delete('/person/:id', async (req, res) => {
+router.delete('/produtos/:id', async (req, res) => {
     const id = req.params.id
 
     const produto = await Produto.findOne({_id: id})
